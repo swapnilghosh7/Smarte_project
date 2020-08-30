@@ -1,0 +1,32 @@
+.employeeDetailsSectionWrap{
+    padding: 35px 25px;
+    border-radius: 6px;
+    border: 3px dashed #1b1c4a;
+
+}
+.allContactSearchWrap{
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+}
+.allContacts{
+  font-weight: 500;
+}
+.searchBox{
+  border: 1px solid #1b1c4a;
+  padding: 0 10px;
+  border-radius: 50px;
+}
+.searchBoxInput{
+  width: 300px;
+  border: none;
+  outline: 0;
+}
+@media(max-width:600px){
+  .companyLabel{
+    width: 100%;
+  }
+  .companyLogo{
+    margin-top: 20px;
+  }
+}

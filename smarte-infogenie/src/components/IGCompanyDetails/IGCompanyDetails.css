@@ -1,0 +1,89 @@
+.companyDetailsSectionWrap{
+  text-align: left;
+  padding: 50px 0;
+}
+.companyLogo{
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 20px;
+}
+.companyLogo img{
+  border-radius: 50%;
+}
+
+.companyLabel{
+    width: auto;
+    display: inline-block;
+    margin-right: 20px;
+}
+.employeeDetails{
+  color: white;
+  text-decoration: none;
+  padding: 15px;
+  border-radius: 6px;
+  background: linear-gradient(to right, #1b1c4a,#5b86e5);
+  font-size: 12px;
+  cursor: pointer;
+}
+.employeeDetails:hover{
+  color: white;
+  text-decoration: none;
+  padding: 15px;
+  border-radius: 6px;
+  background: linear-gradient(to right,#5b86e5, #1b1c4a);
+  font-size: 12px;
+  cursor: pointer;
+}
+.companyDetailsWrap{
+  padding: 35px 15px;
+  border-radius: 6px;
+  border: 3px dashed #1b1c4a;
+  
+}
+
+.companyDetails{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  
+}
+.companydetailsbox{
+  width: 500px;
+  flex-grow: 1;
+  border-radius: 6px;
+  background: linear-gradient(to right, #36d1dc,#5b86e5);
+}
+.companyLogoWrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: #fff;
+}
+.companyNameLogo{
+  font-size: 32px;
+}
+.companydetailsbox{
+  padding: 25px 15px;
+  margin: 15px;
+}
+.companydetailsbox:nth-child(even){
+  /* background: linear-gradient(to right, #36d1dc,#5b86e5); */
+}
+.companydetailsbox:nth-child(odd){
+  /* background: linear-gradient(to right, #36d1dc,#5b86e5); */
+}
+/* .companyAddress{
+  font-size: 12px;
+  color: #ccc;
+} */
+@media(max-width:600px){
+  .companyLabel{
+    width: 100%;
+  }
+  .companyLogo{
+    margin-top: 20px;
+  }
+}
