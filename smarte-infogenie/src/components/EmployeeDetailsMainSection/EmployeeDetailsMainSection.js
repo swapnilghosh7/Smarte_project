@@ -27,10 +27,8 @@ class EmployeeDetailsMainSection extends React.Component {
       let infiniteScrollArray = [];
       infiniteScrollArray.push(this.state.employee_details);
 
-      console.log(document.querySelector('.searchBoxInput').value);
       if(document.querySelector('.searchBoxInput').value !== '')
       {
-        console.log(document.querySelector('.searchBoxInput').value);
         let searchQuery = {
           'key' : document.querySelector('.searchBoxInput').value.toLowerCase(),
           'page_no':  activePage + 1,

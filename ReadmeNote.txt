@@ -6,5 +6,5 @@
 
 6. sorry for npm install thing. Due to internet issue i have to ignore node_modules folder
 
-Note;- make sure your 8081 port is not running.
+Note:- make sure your 8081 port is not running.
 
