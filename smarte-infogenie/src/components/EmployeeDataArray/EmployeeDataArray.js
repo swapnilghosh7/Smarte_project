@@ -12,13 +12,17 @@ class EmployeeDataArray extends React.Component {
   revealButtonChild(e_id){
     this.props.revealButton(e_id);
   }
+  componentDidMount(){
+    // calling infinite scrool function
+    this.props.infiniteScroll();
+  }
   
   render() {
     return (
-      <div className="employeeDetailsArrayWrap">
+      <div id="employeeDetailsArrayWrap" className="employeeDetailsArrayWrap">
       {this.props.employeedata && this.props.employeedata.map((data, i) => {
         return(
-            <div className="employeeDetailsArray">
+            <div key={`employee_banner_${i+1}`} className="employeeDetailsArray">
               <div className="profileImageBox">
                 <span className="firstLetter">
                   {data.first_name.charAt(0).toUpperCase()}{data.last_name.charAt(0).toUpperCase()}

@@ -6,7 +6,7 @@ class EmployeeDetailsMainSection extends React.Component {
   
   constructor(props){
     super(props);
-    // 
+    // Initiating state
     this.state = {
       employee_details: '',
       current_page: 0,
@@ -16,22 +16,19 @@ class EmployeeDetailsMainSection extends React.Component {
   }
   componentDidMount(){
     this.getEmployeeDetails();
+    
   }
-  componentWillMount(){
-    this.eventScrollHandling();
-  }
+
   // -------Infinite Scrolling ------
   infiniteScroll(){
     let activePage = Number(this.state.current_page);
-    console.log('Total Page: ' + this.state.total_page);
-    console.log('Active Page: ' + activePage);
     if(activePage < this.state.total_page){
       let companyName = this.props.companyname;
       let infiniteScrollArray = [];
       infiniteScrollArray.push(this.state.employee_details);
 
       console.log(document.querySelector('.searchBoxInput').value);
-      if(document.querySelector('.searchBoxInput').value != '')
+      if(document.querySelector('.searchBoxInput').value !== '')
       {
         console.log(document.querySelector('.searchBoxInput').value);
         let searchQuery = {
@@ -72,47 +69,58 @@ class EmployeeDetailsMainSection extends React.Component {
     }
     
   }
+  // -------Infinite Scrolling End ------
   
-eventScrollHandling(){
-  window.addEventListener('scroll', (e) => this.handleScroll(e));
-}
-handleScroll(event){
-  let pageOffset = window.pageYOffset + window.innerHeight;
-  let lastChild = document.querySelector('.employeeDetailsArray:last-child');
-  
-  let lastChildOffset = lastChild.offsetTop + lastChild.clientHeight;
-  let bottomOffset = 20;
-  
-  
-  if(pageOffset > (lastChildOffset - bottomOffset) )
-  {
-    // 
-    this.infiniteScroll();
+  // ----------Initiating Scrolling --------------
+  eventScrollHandling(){
+      window.addEventListener('scroll', (e) => this.handleScroll(e));
   }
-  
-}
 
-revealButton(e_id){
-  let query = {
-    'e_id' : e_id
-  };
-  let employee_data = this.state.employee_details;
-  axios.post('http://localhost:8081/updatereveal',query).then((res)=>{
-      if(res.data === 'done'){
-        let updatedEmployeeData = employee_data.map((data,i) => {
-          if(data.e_id == e_id){
-            data.reveal = 1;
-          }
-          return data;
-        })
-        console.log(updatedEmployeeData);
-        this.setState({'employee_details':updatedEmployeeData});
+  // ----------Scrolling Check dom end point --------------
+  handleScroll(event){
+    
+    let pageOffset = window.pageYOffset + window.innerHeight;
+    let lastChild = document.querySelector('div#employeeDetailsArrayWrap > div.employeeDetailsArray:last-child');
+    if(!lastChild || lastChild !== '')
+    {
+      let lastChildOffset = lastChild.offsetTop + lastChild.clientHeight;
+      let bottomOffset = 20;
+      
+      
+      if(pageOffset > (lastChildOffset - bottomOffset) )
+      {
+        // 
+        this.infiniteScroll();
       }
-    });
-}
+    }
+    
+    
+  }
+// ----------Scrolling Check dom end point --------------
 
+  // ----------Reveal button function start ------------
+  revealButton(e_id){
+    let query = {
+      'e_id' : e_id
+    };
+    let employee_data = this.state.employee_details;
+    axios.post('http://localhost:8081/updatereveal',query).then((res)=>{
+        if(res.data === 'done'){
+          let updatedEmployeeData = employee_data.map((data,i) => {
+            if(data.e_id == e_id){
+              data.reveal = 1;
+            }
+            return data;
+          })
+          this.setState({'employee_details':updatedEmployeeData});
+        }
+      });
+  }
+ // ----------Reveal button function start ------------
 
 // ----Infinite Scrolling end -----
+
+// -----------Search Box Start -------
   searchBox(event){
     
     let searchQuery = {
@@ -128,13 +136,15 @@ revealButton(e_id){
       this.setState({'total_length':res.data['length']});
     });
   }
-  
+  // -----------Search Box End -------
+
   companydetails(){
     this.setState({'companyview':false})
   }
+
+  // -----------Getting Details of employee -------
   getEmployeeDetails(){
     let companyName = this.props.companyname;
-    // 
     let query = {
       "company_name": companyName,
       "page_no": 1,
@@ -148,6 +158,9 @@ revealButton(e_id){
       this.setState({'total_length':res.data['length']});
     });
   }
+// -----------Getting Details of employee End -------
+
+
   render() {
     return (
       <div className="employeeDetailsSectionWrap">
@@ -160,7 +173,7 @@ revealButton(e_id){
             
             <div className="employeeDetailsWrap">
               {this.state.employee_details &&
-                <EmployeeDataArray revealButton={(e_id) => this.revealButton(e_id)}  employeedata={this.state.employee_details} />
+                <EmployeeDataArray infiniteScroll={()=>this.eventScrollHandling()} revealButton={(e_id) => this.revealButton(e_id)}  employeedata={this.state.employee_details} />
               }
             </div>
       </div>

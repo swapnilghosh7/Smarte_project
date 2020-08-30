@@ -1,6 +1,6 @@
 import React from 'react';
 import './Header.css';
-import axios from 'axios';
+
 class Header extends React.Component {
   
   render() {
